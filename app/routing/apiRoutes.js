@@ -30,6 +30,6 @@ module.exports = function(app) {
    * The modal should display both the name and picture of the closest match. */
 
     });
-},
+};
 
 

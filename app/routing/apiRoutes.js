@@ -5,31 +5,56 @@ module.exports = function(app) {
     app.get("/api/friends", function(req, res) {
         res.json(users);
     });
-    // A POST routes `/api/friends`. 
-    //This will be used to handle incoming survey results. T
-    //his route will also be used to handle the compatibility logic. 
-    //app.post("/api/friends", function(req, res) {
-        //var matched = {
-        //    name: "",
-        //    photo: "",
-        //    totalDifference: "" //this would be an integer. how do I illustrate that, the way it is done above for an empty string?
-        //};
 
-/*         6. Determine the user's most compatible friend using the following as a guide:
+    // A POST routes `/api/friends`.  
+    app.post("/api/friends", function(req, res) {
+        var matchedWith = {
+            name: "",
+            photo: "",
+            difference: "" //this would be an integer. how do I illustrate that (like above for an empty string)?
+        };
 
-   * Convert each user's results into a simple array of numbers (ex: `[5, 1, 4, 4, 5, 1, 2, 5, 4, 1]`).
-   * With that done, compare the difference between current user's scores against those from other users, question by question. Add up the differences to calculate the `totalDifference`.
-     * Example: 
-       * User 1: `[5, 1, 4, 4, 5, 1, 2, 5, 4, 1]`
-       * User 2: `[3, 2, 6, 4, 5, 1, 2, 5, 4, 1]`
-       * Total Difference: **2 + 1 + 2 =** **_5_**
-   * Remember to use the absolute value of the differences. Put another way: no negative solutions! Your app should calculate both `5-3` and `3-5` as `2`, and so on. 
-   * The closest match will be the user with the least amount of difference.
+        //declare userData and userScores
+        var userData = req.body;
+        var userScores = userData.userScores
 
-7. Once you've found the current user's most compatible friend, display the result as a modal pop-up.
-   * The modal should display both the name and picture of the closest match. */
+        var totalDifference;
 
-    //});
+        //Loop through users
+        for (var i=0; i < users.length; i++) {
+            var currentUser = users[i];
+            totalDifference = 0;
+
+            console.log(currentUser.name);
+
+            //Loop through users' scores
+            for (var j = 0; j < currentUser.scores.length; j++) {
+                //declare variable for the current user's scores
+                var currentUserScore = currentUser.scores[j];
+                //declare variable for the user they are compared with
+                var nextUserScore = userScores[j];
+
+                //use absolute values to avoid negative differences
+                totalDifference += Math.abs(parseInt(nextUserScore) - parseInt(currentUserScore));
+            }
+
+            if (totalDifference <= matchedWith.difference) {
+                matchedWith.name = currentUser.name;
+                matchedWith.photo = currentUser.photo;
+                matchedWith.difference = totalDifference;
+            }
+        }
+
+        users.push(userData);
+
+        res.json(matchedWith);
+
+    //For developing purposes, display user's matchedWith name in cosole
+    console.log(matchedWith.name);
+
+
+    //Future development, display user's matchedWith in a modal with name and photo
+
+    });
+
 };
-
-

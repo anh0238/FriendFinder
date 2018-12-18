@@ -8,12 +8,12 @@ module.exports = function(app) {
     // A POST routes `/api/friends`. 
     //This will be used to handle incoming survey results. T
     //his route will also be used to handle the compatibility logic. 
-    app.post("/api/friends", function(req, res) {
-        var matched = {
-            name: "",
-            photo: "",
-            totalDifference: "" //this would be an integer. how do I illustrate that, the way it is done above for an empty string?
-        };
+    //app.post("/api/friends", function(req, res) {
+        //var matched = {
+        //    name: "",
+        //    photo: "",
+        //    totalDifference: "" //this would be an integer. how do I illustrate that, the way it is done above for an empty string?
+        //};
 
 /*         6. Determine the user's most compatible friend using the following as a guide:
 
@@ -29,7 +29,7 @@ module.exports = function(app) {
 7. Once you've found the current user's most compatible friend, display the result as a modal pop-up.
    * The modal should display both the name and picture of the closest match. */
 
-    });
+    //});
 };
 
 

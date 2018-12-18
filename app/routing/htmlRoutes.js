@@ -1,6 +1,6 @@
 var path = require("path");
 
-modeule.exports = function(app) {
+module.exports = function(app) {
 
     // A GET Route to `/survey` which should display the survey page.
     app.get("/survey", function(req, res) {

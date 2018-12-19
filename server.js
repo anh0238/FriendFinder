@@ -1,5 +1,5 @@
 var express = require("express");
-//var path = require('path'); //look into whether or not this needs to be called on server.js file. per instructions, needed. 
+var path = require('path'); //look into whether or not this needs to be called on server.js file. per instructions, needed. 
 
 var app = express();
 

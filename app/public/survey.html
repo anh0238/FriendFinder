@@ -20,18 +20,18 @@
         <form>
             <div class="form-group">
                 <label for="formGroupExampleInput">Name (Required)</label>
-                <input type="text" class="form-control" id="formGroupExampleInput">
+                <input type="text" class="form-control" id="name">
             </div>
 
             <div class="form-group">
                 <label for="formGroupExampleInput">Image (Required)</label>
-                <input type="text" class="form-control" id="formGroupExampleInput">
+                <input type="text" class="form-control" id="image">
             </div>
 
             <!-- Questions are taken from demo site (https://friend-finder-fsf.herokuapp.com/) -->
             <h3>Question One</h3>
             <label for="formGroupExampleInput">Your mind is always buzzing with unexplored ideas and plans.</label>
-            <select class="form-control" placeholder="Select an Option">
+            <select class="form-control" placeholder="Select an Option" id="q1">
                 <option>Select an Option</option>
                 <option>1 (Strongly Disagree)</option>
                 <option>2</option>
@@ -42,7 +42,7 @@
 
             <h3>Question Two</h3>
             <label for="formGroupExampleInput">Generally speaking, you rely more on your experience than your imagination.</label>
-            <select class="form-control" placeholder="Select an Option">
+            <select class="form-control" placeholder="Select an Option" id="q2">
                 <option>Select an Option</option>
                 <option>1 (Strongly Disagree)</option>
                 <option>2</option>
@@ -53,7 +53,7 @@
 
             <h3>Question Three</h3>
             <label for="formGroupExampleInput">You find it easy to stay relaxed and focused even when there is some pressure.</label>
-            <select class="form-control" placeholder="Select an Option">
+            <select class="form-control" placeholder="Select an Option" id="q3">
                 <option>Select an Option</option>
                 <option>1 (Strongly Disagree)</option>
                 <option>2</option>
@@ -64,7 +64,7 @@
 
             <h3>Question Four</h3>
             <label for="formGroupExampleInput">You rarely do something just out of sheer curiosity.</label>
-            <select class="form-control" placeholder="Select an Option">
+            <select class="form-control" placeholder="Select an Option" id="q4">
                 <option>Select an Option</option>
                 <option>1 (Strongly Disagree)</option>
                 <option>2</option>
@@ -75,7 +75,7 @@
 
             <h3>Question Five</h3>
             <label for="formGroupExampleInput">People can rarely upset you.</label>
-            <select class="form-control" placeholder="Select an Option">
+            <select class="form-control" placeholder="Select an Option" id="q5">
                 <option>Select an Option</option>
                 <option>1 (Strongly Disagree)</option>
                 <option>2</option>
@@ -86,7 +86,7 @@
 
             <h3>Question Six</h3>
             <label for="formGroupExampleInput">It is often difficult for you to relate to other people’s feelings.</label>
-            <select class="form-control" placeholder="Select an Option">
+            <select class="form-control" placeholder="Select an Option" id="q6">
                 <option>Select an Option</option>
                 <option>1 (Strongly Disagree)</option>
                 <option>2</option>
@@ -97,7 +97,7 @@
 
             <h3>Question Seven</h3>
             <label for="formGroupExampleInput">In a discussion, truth should be more important than people’s sensitivities.</label>
-            <select class="form-control" placeholder="Select an Option">
+            <select class="form-control" placeholder="Select an Option" id="q7">
                 <option>Select an Option</option>
                 <option>1 (Strongly Disagree)</option>
                 <option>2</option>
@@ -108,7 +108,7 @@
 
             <h3>Question Eight</h3>
             <label for="formGroupExampleInput">You rarely get carried away by fantasies and ideas.</label>
-            <select class="form-control" placeholder="Select an Option">
+            <select class="form-control" placeholder="Select an Option" id="q8">
                 <option>Select an Option</option>
                 <option>1 (Strongly Disagree)</option>
                 <option>2</option>
@@ -119,7 +119,7 @@
 
             <h3>Question Nine</h3>
             <label for="formGroupExampleInput">You think that everyone’s views should be respected regardless of whether they are supported by facts or not.</label>
-            <select class="form-control" placeholder="Select an Option">
+            <select class="form-control" placeholder="Select an Option" id="q9">
                 <option>Select an Option</option>
                 <option>1 (Strongly Disagree)</option>
                 <option>2</option>
@@ -130,7 +130,7 @@
 
             <h3>Question Ten</h3>
             <label for="formGroupExampleInput">You feel more energetic after spending time with a group of people.</label>
-            <select class="form-control" placeholder="Select an Option">
+            <select class="form-control" placeholder="Select an Option" id="q10">
                 <option>Select an Option</option>
                 <option>1 (Strongly Disagree)</option>
                 <option>2</option>
@@ -139,7 +139,7 @@
                 <option>5 (Strongly Agree)</option>
             </select>
 
-            <button type="button" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#exampleModalCenter">Submit</button>
+            <button type="button" id="form-submit" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#exampleModalCenter">Submit</button>
         </form>
     </div>
 
@@ -148,7 +148,7 @@
         need to add the js bootstrap scripts in <head>
         can be vertically centered -->
     <!-- Modal -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal fade" id="your-match" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered" role="document">
             <div class="modal-content">
                 <div class="modal-header">
@@ -172,19 +172,47 @@
     <!-- Use JQuery to add obtain answers from form -->
     <script type="text/javascript">
     //on click function for when submit button is selected
+    $("#form-submit").on("click", function(event) {
+        event.preventDefault();
+        
+        //collect user's input
+        var userData = {
+            name: $("name").val(),
+            photo: $("image").val(),
+            scores: [
+                $("q1").val(),
+                $("q2").val(),
+                $("q3").val(),
+                $("q4").val(),
+                $("q5").val(),
+                $("q6").val(),
+                $("q7").val(),
+                $("q8").val(),
+                $("q9").val(),
+                $("q10").val()
+            ]
+        };
 
-    //collect user's input
+        //push data to friends.js
+        $.post("/api/friends", userData, function(data) {
+            //get matchedWith user
+            $("#match-name").text(data.name);
+            $("#match-image").attr("src", data.photo);
 
-    //push data to friends.js
+            //display matchedWith user in modal
+            $("#your-match").modal("toggle");
 
-    //get matchedWith user
+        });
 
-    //display matchedWith user in modal
-    
+
+    });
+
     </script>
     
 </body>
 </html>
+
+
 
 
 

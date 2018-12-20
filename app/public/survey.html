@@ -139,7 +139,7 @@
                 <option>5 (Strongly Agree)</option>
             </select>
 
-            <button type="button" id="form-submit" class="btn btn-primary btn-lg btn-block" data-toggle="modal" data-target="#exampleModalCenter">Submit</button>
+            <button type="button" id="form-submit" class="btn btn-primary btn-lg btn-block" >Submit</button>
         </form>
     </div>
 
@@ -175,8 +175,9 @@
     $("#form-submit").on("click", function(event) {
         event.preventDefault();
         
-        //collect user's input
-        var userData = {
+        function formData() {
+//collect user's input
+var userData = {
             name: $("name").val(),
             photo: $("image").val(),
             scores: [
@@ -201,8 +202,11 @@
 
             //display matchedWith user in modal
             $("#your-match").modal("toggle");
+        
 
         });
+        }
+        
 
 
     });

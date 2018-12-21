@@ -176,39 +176,36 @@
         event.preventDefault();
         
         function formData() {
-//collect user's input
-var userData = {
-            name: $("name").val(),
-            photo: $("image").val(),
-            scores: [
-                $("q1").val(),
-                $("q2").val(),
-                $("q3").val(),
-                $("q4").val(),
-                $("q5").val(),
-                $("q6").val(),
-                $("q7").val(),
-                $("q8").val(),
-                $("q9").val(),
-                $("q10").val()
-            ]
-        };
+            //collect user's input
+            var userData = {
+                name: $("name").val(),
+                photo: $("image").val(),
+                scores: [
+                    $("q1").val(),
+                    $("q2").val(),
+                    $("q3").val(),
+                    $("q4").val(),
+                    $("q5").val(),
+                    $("q6").val(),
+                    $("q7").val(),
+                    $("q8").val(),
+                    $("q9").val(),
+                    $("q10").val()
+                ]
+            };
 
-        //push data to friends.js
-        $.post("/api/friends", userData, function(data) {
-            //get matchedWith user
-            $("#match-name").text(data.name);
-            $("#match-image").attr("src", data.photo);
+            //push data to friends.js
+            $.post("/api/friends", userData, function(data) {
+                //get matchedWith user
+                $("#match-name").text(data.name);
+                $("#match-image").attr("src", data.photo);
 
-            //display matchedWith user in modal
-            $("#your-match").modal("toggle");
-        
+                //display matchedWith user in modal
+                $("#your-match").modal("toggle");
+            
 
-        });
+            });
         }
-        
-
-
     });
 
     </script>
